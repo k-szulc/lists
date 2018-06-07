@@ -41,20 +41,27 @@ class NewVisitorTest(unittest.TestCase):
 
             table = self.browser.find_element_by_id('id_list_table')
             rows = table.find_elements_by_tag_name('tr')
-            self.assertTrue(
-                any(row.text == '1: Drink Margarittas' for row in rows),
-                "New to-do item not appear in table"
-            )
+            self.assertIn('1: Drink Margarittas', [row.text for row in rows])
 
             # You still see the box inviting to add another item, You enter
             # "Drink Cuba Libres"
-            self.fail('Finish the test!')
+            inputbox = self.browser.find_element_by_id('id_new_item')
+            inputbox.send_keys('Drink Cuba Libres')
+            inputbox.send_keys(Keys.ENTER)
+            time.sleep(1)
+
+
 
             # Page updates again, showing both items on the lists
 
+            table = self.browser.find_element_by_id('id_list_table')
+            rows = table.find_elements_by_tag_name('tr')
+            self.assertIn('1: Drink Margarittas', [row.text for row in rows])
+            self.assertIn('2: Drink Cuba Libres', [row.text for row in rows])
+
             # Sites creates an unique URL for user to remember the list
             #-- it needs some exlanatory text
-
+            self.fail('Finish the test!')
             # You vistit the page again, the list is still there
 
             # You are happy, you quit your browser and go mix your drinks
