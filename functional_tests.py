@@ -23,7 +23,6 @@ class NewVisitorTest(unittest.TestCase):
 
         # To see the webpage you need to go to the homepage
         self.browser.get('http://localhost:8000')
-        a
 
 
         # You can easly know you are in correct place by the title and header
